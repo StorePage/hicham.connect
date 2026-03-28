@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html class="scroll-smooth" lang="fr">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Store Page | Web Design pour Coopératives Marocaines</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,700;1,400&family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+  tailwind.config={darkMode:"class",theme:{extend:{colors:{"on-tertiary-container":"#c7a88b","surface-container-lowest":"#ffffff","inverse-surface":"#31312c","tertiary-container":"#533d26","on-tertiary":"#ffffff","on-surface":"#1c1c18","surface":"#fcf9f2","surface-dim":"#dcdad3","primary-fixed-dim":"#b0cdbb","secondary-container":"#fe996c","on-secondary-fixed-variant":"#78310c","on-surface-variant":"#424844","surface-container-high":"#ebe8e1","on-primary-fixed-variant":"#324c3e","primary":"#173124","outline":"#727973","inverse-on-surface":"#f3f0e9","background":"#fcf9f2","secondary":"#974822","on-tertiary-fixed-variant":"#59422b","on-primary-fixed":"#062014","surface-container":"#f1eee7","on-background":"#1c1c18","secondary-fixed":"#ffdbcd","on-primary":"#ffffff","inverse-primary":"#b0cdbb","outline-variant":"#c2c8c2","on-error-container":"#93000a","error":"#ba1a1a","on-secondary":"#ffffff","error-container":"#ffdad6","on-tertiary-fixed":"#291805","surface-variant":"#e5e2db","on-error":"#ffffff","surface-tint":"#496455","secondary-fixed-dim":"#ffb596","tertiary-fixed-dim":"#e1c1a2","primary-fixed":"#ccead6","surface-container-highest":"#e5e2db","on-primary-container":"#98b5a3","surface-container-low":"#f6f3ec","on-secondary-container":"#76300a","primary-container":"#2d4739","surface-bright":"#fcf9f2","on-secondary-fixed":"#360f00","tertiary":"#3b2712","tertiary-fixed":"#ffdcbd"},fontFamily:{"serif":["Noto Serif","serif"],"sans":["Manrope","sans-serif"]},borderRadius:{"DEFAULT":"0.125rem","lg":"0.25rem","xl":"0.5rem","full":"0.75rem"}}}}
+</script>
+<style>
+.material-symbols-outlined{font-variation-settings:'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 24}
+.portfolio-card{transition:transform .3s ease,box-shadow .3s ease}
+.portfolio-card:hover{transform:translateY(-6px);box-shadow:0 20px 40px rgba(23,49,36,.12)}
+@keyframes wa-pulse{0%,100%{box-shadow:0 0 0 0 rgba(37,211,102,.4)}50%{box-shadow:0 0 0 10px rgba(37,211,102,0)}}
+.wa-pulse{animation:wa-pulse 2s ease-in-out infinite}
+.wa-float{position:fixed;bottom:28px;right:28px;z-index:1000;width:60px;height:60px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 24px rgba(37,211,102,.5);transition:transform .2s ease}
+.wa-float:hover{transform:scale(1.1)}
+.wa-float svg{width:30px;height:30px;fill:white}
+#detail-modal{position:fixed;inset:0;z-index:2000;display:none;align-items:flex-start;justify-content:center;background:rgba(23,49,36,.6);backdrop-filter:blur(6px);overflow-y:auto;padding:24px 12px}
+#detail-modal.open{display:flex}
+#detail-panel{background:#fcf9f2;border-radius:24px;width:100%;max-width:1100px;margin:auto;overflow:hidden;animation:slideUp .35s cubic-bezier(.22,1,.36,1) both}
+@keyframes slideUp{from{opacity:0;transform:translateY(40px) scale(.97)}to{opacity:1;transform:translateY(0) scale(1)}}
+.browser-frame{background:#e8e4dd;border-radius:12px;overflow:hidden;box-shadow:0 8px 40px rgba(23,49,36,.18)}
+.browser-bar{background:#d5d0c8;padding:10px 14px;display:flex;align-items:center;gap:8px}
+.browser-dot{width:11px;height:11px;border-radius:50%}
+.browser-url{flex:1;background:#c8c3bb;border-radius:6px;padding:4px 10px;font-size:11px;color:#424844;font-family:'Manrope',sans-serif;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.browser-iframe-wrap{position:relative;width:100%;padding-bottom:56%;background:#fff;overflow:hidden}
+.browser-iframe-wrap iframe{position:absolute;top:0;left:0;width:167%;height:167%;transform:scale(.6);transform-origin:top left;border:none;pointer-events:none}
+.iframe-loading{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;background:#f1eee7;gap:12px;font-family:'Manrope',sans-serif;color:#727973;font-size:13px}
+.phone-frame{width:160px;flex-shrink:0;background:#2a2a2a;border-radius:32px;padding:10px;box-shadow:0 12px 40px rgba(0,0,0,.3)}
+.phone-screen{border-radius:24px;overflow:hidden;position:relative;padding-bottom:210%;background:#fff}
+.phone-screen iframe{position:absolute;top:0;left:0;width:334%;height:334%;transform:scale(.3);transform-origin:top left;border:none;pointer-events:none}
+.phone-notch{width:60px;height:8px;background:#1a1a1a;border-radius:4px;margin:0 auto 8px}
+.feat-badge{display:inline-flex;align-items:center;gap:6px;background:#fff;border:1px solid #c2c8c2;border-radius:999px;padding:6px 14px;font-size:12px;font-family:'Manrope',sans-serif;color:#424844;font-weight:600}
+.feat-badge .dot{width:8px;height:8px;border-radius:50%;background:#25D366;flex-shrink:0}
+.adv-card{background:#fff;border-radius:14px;padding:18px;border:1px solid #e5e2db;display:flex;gap:12px;align-items:flex-start}
+.adv-icon{width:40px;height:40px;border-radius:10px;flex-shrink:0;background:#f1eee7;display:flex;align-items:center;justify-content:center}
+</style>
+</head>
+<body class="bg-background text-on-background font-sans selection:bg-secondary/30 selection:text-secondary">
+
+<!-- DETAIL MODAL -->
+<div id="detail-modal">
+<div id="detail-panel">
+  <div class="flex items-center justify-between px-8 py-5 border-b border-outline-variant/30 bg-white sticky top-0 z-10">
+    <div class="flex items-center gap-4">
+      <span id="modal-badge" class="bg-secondary text-on-secondary text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-full"></span>
+      <h2 id="modal-title" class="font-serif text-2xl text-primary"></h2>
+    </div>
+    <button onclick="closeModal()" class="w-10 h-10 rounded-full bg-surface-container-high hover:bg-surface-container-highest transition flex items-center justify-center text-on-surface-variant">
+      <span class="material-symbols-outlined">close</span>
+    </button>
+  </div>
+  <div class="p-6 md:p-10 grid grid-cols-1 lg:grid-cols-5 gap-10">
+    <!-- Left screens -->
+    <div class="lg:col-span-3 flex flex-col gap-6">
+      <div class="browser-frame">
+        <div class="browser-bar">
+          <div class="browser-dot bg-[#ff5f56]"></div>
+          <div class="browser-dot bg-[#ffbd2e]"></div>
+          <div class="browser-dot bg-[#27c93f]"></div>
+          <div id="modal-url" class="browser-url"></div>
+        </div>
+        <div class="browser-iframe-wrap">
+          <div class="iframe-loading" id="iframe-loading-desk">
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" opacity=".4"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M8 20h8M12 16v4"/></svg>
+            <span>Chargement du site…</span>
+          </div>
+          <iframe id="modal-iframe-desk" src="" onload="iframeLoaded('desk')" title="Aperçu bureau"></iframe>
+        </div>
+      </div>
+      <div class="flex items-start gap-6">
+        <div class="phone-frame">
+          <div class="phone-notch"></div>
+          <div class="phone-screen">
+            <div class="iframe-loading" id="iframe-loading-mob">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" opacity=".4"><rect x="5" y="2" width="14" height="20" rx="2"/><circle cx="12" cy="17" r="1"/></svg>
+            </div>
+            <iframe id="modal-iframe-mob" src="" onload="iframeLoaded('mob')" title="Aperçu mobile"></iframe>
+          </div>
+        </div>
+        <div class="flex-1 flex flex-col gap-3">
+          <p class="font-sans text-xs font-bold uppercase tracking-widest text-outline">Aperçu mobile</p>
+          <p id="modal-desc-long" class="font-sans text-sm text-on-surface leading-relaxed"></p>
+        </div>
+      </div>
+    </div>
+    <!-- Right details -->
+    <div class="lg:col-span-2 flex flex-col gap-6">
+      <div>
+        <p class="font-sans text-xs font-bold uppercase tracking-widest text-outline mb-3">Fonctionnalités incluses</p>
+        <div id="modal-features" class="flex flex-wrap gap-2"></div>
+      </div>
+      <div>
+        <p class="font-sans text-xs font-bold uppercase tracking-widest text-outline mb-3">Pourquoi ce site se démarque</p>
+        <div id="modal-advantages" class="flex flex-col gap-3"></div>
+      </div>
+      <div id="modal-stats" class="grid grid-cols-3 gap-3"></div>
+      <div class="flex flex-col gap-3 pt-2">
+        <a id="modal-visit-btn" href="#" target="_blank"
+          class="w-full text-center bg-primary text-on-primary px-6 py-3.5 rounded-xl font-bold text-sm hover:bg-primary-container transition-all flex items-center justify-center gap-2">
+          <span class="material-symbols-outlined text-base">open_in_new</span> Visiter le site
+        </a>
+        <a id="modal-wa-btn" href="#" target="_blank"
+          class="w-full text-center bg-[#25D366] text-white px-6 py-3.5 rounded-xl font-bold text-sm hover:bg-[#1ebe5a] transition-all wa-pulse flex items-center justify-center gap-2">
+          <svg class="w-4 h-4 fill-current" viewBox="0 0 32 32"><path d="M16 1C7.716 1 1 7.716 1 16c0 2.674.693 5.184 1.907 7.36L1 31l7.867-1.884A14.938 14.938 0 0016 31c8.284 0 15-6.716 15-15S24.284 1 16 1zm6.63 18.12c-.363-.182-2.15-1.061-2.484-1.183-.334-.12-.577-.182-.82.182-.242.364-.94 1.183-1.152 1.426-.213.242-.425.272-.787.09-.364-.181-1.535-.566-2.924-1.806-1.08-.964-1.81-2.155-2.023-2.518-.212-.363-.023-.56.16-.74.163-.163.363-.425.545-.636.181-.212.242-.363.363-.606.121-.242.06-.455-.03-.636-.09-.181-.82-1.977-1.122-2.707-.296-.71-.597-.614-.82-.625l-.697-.012a1.34 1.34 0 00-.97.454c-.333.364-1.27 1.244-1.27 3.033 0 1.79 1.3 3.52 1.48 3.763.183.242 2.56 3.912 6.2 5.486.869.375 1.547.598 2.075.766.872.278 1.666.238 2.294.145.7-.104 2.15-.878 2.454-1.727.303-.849.303-1.576.212-1.727-.09-.152-.333-.242-.697-.424z"/></svg>
+          Commander ce site via WhatsApp
+        </a>
+        <p class="text-center text-[11px] text-outline">Réponse garantie sous 24h · Devis gratuit</p>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- FLOATING WA -->
+<a class="wa-float wa-pulse" href="https://wa.me/212633548605?text=Bonjour%2C%20je%20suis%20intéressé(e)%20par%20vos%20services." target="_blank">
+  <svg viewBox="0 0 32 32"><path d="M16 1C7.716 1 1 7.716 1 16c0 2.674.693 5.184 1.907 7.36L1 31l7.867-1.884A14.938 14.938 0 0016 31c8.284 0 15-6.716 15-15S24.284 1 16 1zm6.63 18.12c-.363-.182-2.15-1.061-2.484-1.183-.334-.12-.577-.182-.82.182-.242.364-.94 1.183-1.152 1.426-.213.242-.425.272-.787.09-.364-.181-1.535-.566-2.924-1.806-1.08-.964-1.81-2.155-2.023-2.518-.212-.363-.023-.56.16-.74.163-.163.363-.425.545-.636.181-.212.242-.363.363-.606.121-.242.06-.455-.03-.636-.09-.181-.82-1.977-1.122-2.707-.296-.71-.597-.614-.82-.625l-.697-.012a1.34 1.34 0 00-.97.454c-.333.364-1.27 1.244-1.27 3.033 0 1.79 1.3 3.52 1.48 3.763.183.242 2.56 3.912 6.2 5.486.869.375 1.547.598 2.075.766.872.278 1.666.238 2.294.145.7-.104 2.15-.878 2.454-1.727.303-.849.303-1.576.212-1.727-.09-.152-.333-.242-.697-.424z"/></svg>
+</a>
+
+<!-- NAVBAR -->
+<nav class="fixed top-0 w-full z-50 bg-[#fcf9f2]/80 backdrop-blur-xl shadow-sm shadow-[#1c1c18]/5">
+<div class="flex justify-between items-center px-8 py-4 max-w-7xl mx-auto">
+  <div class="font-serif text-2xl font-bold text-[#173124]">Store Page</div>
+  <div class="hidden md:flex items-center gap-10">
+    <a class="font-serif text-lg tracking-tight text-[#974822] border-b-2 border-[#974822] pb-1" href="#hero">Accueil</a>
+    <a class="font-serif text-lg tracking-tight text-[#1c1c18]/70 hover:text-[#974822] transition-colors" href="#portfolio">Portfolio</a>
+    <a class="font-serif text-lg tracking-tight text-[#1c1c18]/70 hover:text-[#974822] transition-colors" href="#contact">Contact</a>
+  </div>
+  <a href="https://wa.me/212633548605?text=Bonjour%2C%20je%20souhaite%20démarrer%20un%20projet." target="_blank"
+    class="bg-primary text-on-primary px-6 py-2.5 rounded-md font-medium text-sm hover:bg-primary-container transition-all flex items-center gap-2">
+    <svg class="w-4 h-4 fill-current" viewBox="0 0 32 32"><path d="M16 1C7.716 1 1 7.716 1 16c0 2.674.693 5.184 1.907 7.36L1 31l7.867-1.884A14.938 14.938 0 0016 31c8.284 0 15-6.716 15-15S24.284 1 16 1zm6.63 18.12c-.363-.182-2.15-1.061-2.484-1.183-.334-.12-.577-.182-.82.182-.242.364-.94 1.183-1.152 1.426-.213.242-.425.272-.787.09-.364-.181-1.535-.566-2.924-1.806-1.08-.964-1.81-2.155-2.023-2.518-.212-.363-.023-.56.16-.74.163-.163.363-.425.545-.636.181-.212.242-.363.363-.606.121-.242.06-.455-.03-.636-.09-.181-.82-1.977-1.122-2.707-.296-.71-.597-.614-.82-.625l-.697-.012a1.34 1.34 0 00-.97.454c-.333.364-1.27 1.244-1.27 3.033 0 1.79 1.3 3.52 1.48 3.763.183.242 2.56 3.912 6.2 5.486.869.375 1.547.598 2.075.766.872.278 1.666.238 2.294.145.7-.104 2.15-.878 2.454-1.727.303-.849.303-1.576.212-1.727-.09-.152-.333-.242-.697-.424z"/></svg>
+    Travaillons Ensemble
+  </a>
+</div>
+</nav>
+
+<main>
+<!-- HERO -->
+<section class="relative min-h-screen flex items-center pt-20 overflow-hidden" id="hero">
+<div class="absolute inset-0 z-0">
+  <div class="absolute inset-0 bg-gradient-to-r from-background via-background/90 to-transparent z-10"></div>
+  <img class="w-full h-full object-cover opacity-20" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA-BeweHO_P5jtk_F-Zm_tdpdmkp-p4ju6Ncr0KWCeQKpybk47QtVoMrLyeRO_zqMjvF_wpaPLxQI_yOEJloHDB_yV5AoaNf11YG1K0TjpKrt3TcgZv7DAjGgw6K5hYV9LBvglvmwlAPGt3p2XUpfC6UTTxri8afDHoKc_giA0mrC4FnK1NmMSEAUIbaPSJG5KN3m7TZ7y2hdahEcSSoVzCV1h_qxklU9KsytV0aegItE7soelrdMZrpD4pRwDfQ7KjrWAAlkbPm3Dm" alt=""/>
+</div>
+<div class="container mx-auto px-8 relative z-20 max-w-7xl">
+  <div class="max-w-4xl">
+    <span class="inline-block px-4 py-1.5 bg-secondary-fixed text-on-secondary-fixed text-xs font-bold uppercase tracking-[0.2em] rounded-full mb-8">Excellence Digitale &amp; Terroir</span>
+    <h1 class="font-serif text-5xl md:text-7xl lg:text-8xl text-primary leading-[1.1] mb-10">Des Solutions Web pour l'Authenticité du <span class="text-secondary">Terroir Marocain</span></h1>
+    <p class="font-sans text-xl md:text-2xl text-on-surface-variant max-w-2xl leading-relaxed mb-12">Nous concevons des plateformes digitales sur mesure qui capturent l'âme de vos coopératives et propulsent vos produits sur le marché mondial.</p>
+    <div class="flex flex-col sm:flex-row gap-6">
+      <a class="bg-primary text-on-primary px-8 py-4 rounded-md text-lg font-semibold flex items-center justify-center gap-3 hover:shadow-xl transition-all group" href="#portfolio">Découvrir nos réalisations <span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">arrow_forward</span></a>
+      <a class="bg-surface-container-high text-on-surface-variant px-8 py-4 rounded-md text-lg font-semibold border border-outline-variant/20 flex items-center justify-center gap-3 hover:bg-surface-variant transition-all" href="#contact">Réserver une consultation</a>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- PORTFOLIO -->
+<section class="py-24 bg-surface-container-low" id="portfolio">
+<div class="container mx-auto px-8 max-w-7xl">
+  <div class="flex flex-col md:flex-row justify-between items-end mb-20 gap-8">
+    <div class="max-w-2xl">
+      <h2 class="font-serif text-4xl md:text-5xl text-primary mb-6">Notre Galerie de Projets</h2>
+      <p class="text-on-surface-variant text-lg">Un aperçu de notre engagement auprès des producteurs locaux. Chaque site est une pièce d'artisanat numérique unique.</p>
+    </div>
+    <div class="flex flex-wrap gap-3">
+      <button class="px-6 py-2 rounded-full bg-secondary text-on-secondary font-medium text-sm shadow-md">Tout</button>
+      <button class="px-6 py-2 rounded-full bg-surface-variant text-on-surface-variant hover:bg-surface-container-highest font-medium text-sm transition-all">Alimentaire</button>
+      <button class="px-6 py-2 rounded-full bg-surface-variant text-on-surface-variant hover:bg-surface-container-highest font-medium text-sm transition-all">Cosmétique</button>
+      <button class="px-6 py-2 rounded-full bg-surface-variant text-on-surface-variant hover:bg-surface-container-highest font-medium text-sm transition-all">Artisanat</button>
+    </div>
+  </div>
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="cards-grid"></div>
+</div>
+</section>
+
+<!-- VALUES -->
+<section class="py-24 bg-primary text-on-primary">
+<div class="container mx-auto px-8 max-w-7xl">
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+    <div>
+      <h2 class="font-serif text-4xl md:text-5xl mb-8 leading-tight">Pourquoi choisir l'Atelier pour votre coopérative?</h2>
+      <p class="text-on-primary-container text-lg mb-12 max-w-xl">Nous ne construisons pas seulement des sites web, nous bâtissons des ponts entre vos racines et le futur digital.</p>
+      <div class="space-y-10">
+        <div class="flex gap-6"><div class="w-12 h-12 rounded-full bg-secondary-container/20 flex items-center justify-center flex-shrink-0"><span class="material-symbols-outlined text-secondary-container">eco</span></div><div><h4 class="font-serif text-xl mb-2">Engagement Durable</h4><p class="text-on-primary-container/80 text-sm leading-relaxed">Nous privilégions des solutions éco-conçues qui respectent l'éthique de votre production locale.</p></div></div>
+        <div class="flex gap-6"><div class="w-12 h-12 rounded-full bg-secondary-container/20 flex items-center justify-center flex-shrink-0"><span class="material-symbols-outlined text-secondary-container">palette</span></div><div><h4 class="font-serif text-xl mb-2">Design Culturel</h4><p class="text-on-primary-container/80 text-sm leading-relaxed">Chaque pixel est imprégné des motifs, couleurs et de l'histoire du patrimoine marocain.</p></div></div>
+        <div class="flex gap-6"><div class="w-12 h-12 rounded-full bg-secondary-container/20 flex items-center justify-center flex-shrink-0"><span class="material-symbols-outlined text-secondary-container">trending_up</span></div><div><h4 class="font-serif text-xl mb-2">Expansion Globale</h4><p class="text-on-primary-container/80 text-sm leading-relaxed">Optimisation SEO et plateformes multilingues pour conquérir de nouveaux marchés à l'export.</p></div></div>
+      </div>
+    </div>
+    <div class="relative">
+      <div class="aspect-square rounded-full border border-outline-variant/20 absolute -top-10 -right-10 w-full animate-pulse"></div>
+      <img class="relative z-10 w-full h-full object-cover rounded-2xl shadow-2xl" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAXXvPYO_fArGCVlPWpWEjo5Qg4JHlrSt9cy3SVBYurU2q3owOafATHhWbuA7DmrZSpJPjAS0H5hOAPBcC526twn-BQccUCjMPYkBXZRmmCGMg_VgtKFBmJEOLxutFpgq8OAoV50-Uf1SOu2XG4xh6t5TObc0DCRQldU_e1e3Z02HZzJsk8nBjkQvSlnBTqGrkrPb3dsvMoTzom6iKeOPVXdF2YbIMRhVDhkUGhBFT2-47OA5D9xXK483SC8Iibczx2Q-wgB-mMxZRe" alt=""/>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- CONTACT -->
+<section class="py-24 bg-surface" id="contact">
+<div class="container mx-auto px-8 max-w-7xl">
+  <div class="bg-surface-container-highest rounded-3xl p-12 md:p-16 mb-12 flex flex-col items-center text-center">
+    <h2 class="font-serif text-4xl md:text-6xl text-primary mb-6 max-w-3xl">Prêt à digitaliser votre héritage?</h2>
+    <p class="text-on-surface-variant text-xl mb-12 max-w-2xl">Discutons de votre projet et élaborons ensemble une stratégie digitale qui honore votre travail.</p>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-2xl">
+      <div class="flex flex-col gap-4 bg-white rounded-2xl p-6 border border-outline-variant/30 shadow-sm">
+        <div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mx-auto"><span class="material-symbols-outlined text-primary">mail</span></div>
+        <h3 class="font-serif text-lg text-primary font-bold">Par e-mail</h3>
+        <p class="text-on-surface-variant text-sm">Envoyez votre adresse et nous vous recontactons sous 24h.</p>
+        <input class="bg-surface border border-outline-variant/40 rounded-md px-4 py-3 text-sm w-full focus:ring-2 focus:ring-secondary focus:outline-none" placeholder="Votre adresse email" type="email"/>
+        <button class="bg-secondary text-on-secondary px-6 py-3 rounded-md font-bold text-sm hover:bg-on-secondary-container transition-all w-full">Envoyer</button>
+      </div>
+      <div class="flex flex-col gap-4 bg-white rounded-2xl p-6 border border-[#25D366]/30 shadow-sm">
+        <div class="w-12 h-12 rounded-full bg-[#25D366]/15 flex items-center justify-center mx-auto">
+          <svg class="w-6 h-6 fill-[#25D366]" viewBox="0 0 32 32"><path d="M16 1C7.716 1 1 7.716 1 16c0 2.674.693 5.184 1.907 7.36L1 31l7.867-1.884A14.938 14.938 0 0016 31c8.284 0 15-6.716 15-15S24.284 1 16 1zm6.63 18.12c-.363-.182-2.15-1.061-2.484-1.183-.334-.12-.577-.182-.82.182-.242.364-.94 1.183-1.152 1.426-.213.242-.425.272-.787.09-.364-.181-1.535-.566-2.924-1.806-1.08-.964-1.81-2.155-2.023-2.518-.212-.363-.023-.56.16-.74.163-.163.363-.425.545-.636.181-.212.242-.363.363-.606.121-.242.06-.455-.03-.636-.09-.181-.82-1.977-1.122-2.707-.296-.71-.597-.614-.82-.625l-.697-.012a1.34 1.34 0 00-.97.454c-.333.364-1.27 1.244-1.27 3.033 0 1.79 1.3 3.52 1.48 3.763.183.242 2.56 3.912 6.2 5.486.869.375 1.547.598 2.075.766.872.278 1.666.238 2.294.145.7-.104 2.15-.878 2.454-1.727.303-.849.303-1.576.212-1.727-.09-.152-.333-.242-.697-.424z"/></svg>
+        </div>
+        <h3 class="font-serif text-lg text-primary font-bold">Via WhatsApp</h3>
+        <p class="text-on-surface-variant text-sm">Réponse rapide et directe sur votre projet.</p>
+        <div class="flex items-center justify-center gap-2 bg-[#25D366]/10 rounded-md px-4 py-2 text-[#1a9e52] font-bold text-sm">+212 633 548 605</div>
+        <a href="https://wa.me/212633548605?text=Bonjour%2C%20je%20souhaite%20un%20devis." target="_blank"
+          class="bg-[#25D366] text-white px-6 py-3 rounded-md font-bold text-sm hover:bg-[#1ebe5a] transition-all w-full flex items-center justify-center gap-2 wa-pulse">
+          <svg class="w-4 h-4 fill-current" viewBox="0 0 32 32"><path d="M16 1C7.716 1 1 7.716 1 16c0 2.674.693 5.184 1.907 7.36L1 31l7.867-1.884A14.938 14.938 0 0016 31c8.284 0 15-6.716 15-15S24.284 1 16 1zm6.63 18.12c-.363-.182-2.15-1.061-2.484-1.183-.334-.12-.577-.182-.82.182-.242.364-.94 1.183-1.152 1.426-.213.242-.425.272-.787.09-.364-.181-1.535-.566-2.924-1.806-1.08-.964-1.81-2.155-2.023-2.518-.212-.363-.023-.56.16-.74.163-.163.363-.425.545-.636.181-.212.242-.363.363-.606.121-.242.06-.455-.03-.636-.09-.181-.82-1.977-1.122-2.707-.296-.71-.597-.614-.82-.625l-.697-.012a1.34 1.34 0 00-.97.454c-.333.364-1.27 1.244-1.27 3.033 0 1.79 1.3 3.52 1.48 3.763.183.242 2.56 3.912 6.2 5.486.869.375 1.547.598 2.075.766.872.278 1.666.238 2.294.145.7-.104 2.15-.878 2.454-1.727.303-.849.303-1.576.212-1.727-.09-.152-.333-.242-.697-.424z"/></svg>
+          Démarrer sur WhatsApp
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="flex flex-wrap items-center justify-center gap-8 py-6 border-t border-outline-variant/20">
+    <div class="flex items-center gap-2 text-on-surface-variant text-sm"><span class="material-symbols-outlined text-secondary text-xl">verified</span>Réponse sous 24h garantie</div>
+    <div class="flex items-center gap-2 text-on-surface-variant text-sm"><span class="material-symbols-outlined text-secondary text-xl">lock</span>Devis gratuit &amp; sans engagement</div>
+    <div class="flex items-center gap-2 text-on-surface-variant text-sm"><span class="material-symbols-outlined text-secondary text-xl">support_agent</span>Support en Arabe, Français &amp; Amazigh</div>
+  </div>
+</div>
+</section>
+</main>
+
+<footer class="bg-[#173124] w-full pt-20 pb-10">
+<div class="flex flex-col md:flex-row justify-between items-center px-12 w-full gap-8">
+  <div class="flex flex-col gap-4 items-center md:items-start">
+    <div class="font-serif text-xl text-[#974822]">Artisanal Digital Atelier</div>
+    <p class="font-sans text-sm uppercase tracking-widest text-[#fcf9f2]/60">© 2026 Artisanal Digital Atelier. Made with LOVE.</p>
+  </div>
+  <div class="flex gap-8">
+    <a class="font-sans text-sm uppercase tracking-widest text-[#fcf9f2]/60 hover:text-[#fcf9f2] transition-all" href="https://web.facebook.com/hicham.connect/">Facebook</a>
+    <a class="font-sans text-sm uppercase tracking-widest text-[#fcf9f2]/60 hover:text-[#fcf9f2] transition-all" href="https://www.instagram.com/hicham.connect/">Instagram</a>
+    <a class="font-sans text-sm uppercase tracking-widest text-[#fcf9f2]/60 hover:text-[#fcf9f2] transition-all" href="#">Behance</a>
+    <a href="https://wa.me/212633548605" target="_blank" class="font-sans text-sm uppercase tracking-widest text-[#25D366]/80 hover:text-[#25D366] transition-all">WhatsApp</a>
+  </div>
+</div>
+</footer>
+
+<script>
+const WA='212633548605';
+const WA_SVG=`<svg class="w-4 h-4 fill-current" viewBox="0 0 32 32"><path d="M16 1C7.716 1 1 7.716 1 16c0 2.674.693 5.184 1.907 7.36L1 31l7.867-1.884A14.938 14.938 0 0016 31c8.284 0 15-6.716 15-15S24.284 1 16 1zm6.63 18.12c-.363-.182-2.15-1.061-2.484-1.183-.334-.12-.577-.182-.82.182-.242.364-.94 1.183-1.152 1.426-.213.242-.425.272-.787.09-.364-.181-1.535-.566-2.924-1.806-1.08-.964-1.81-2.155-2.023-2.518-.212-.363-.023-.56.16-.74.163-.163.363-.425.545-.636.181-.212.242-.363.363-.606.121-.242.06-.455-.03-.636-.09-.181-.82-1.977-1.122-2.707-.296-.71-.597-.614-.82-.625l-.697-.012a1.34 1.34 0 00-.97.454c-.333.364-1.27 1.244-1.27 3.033 0 1.79 1.3 3.52 1.48 3.763.183.242 2.56 3.912 6.2 5.486.869.375 1.547.598 2.075.766.872.278 1.666.238 2.294.145.7-.104 2.15-.878 2.454-1.727.303-.849.303-1.576.212-1.727-.09-.152-.333-.242-.697-.424z"/></svg>`;
+
+const SITES=[
+  {
+    id:'cooperative-gen',
+    title:'Coopérative (Général)',
+    badge:'Artisanat',
+    img:'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj1uCqEig8o-UAOZhz7td-8CU-uFPewhkuf5vRbD54ln5mjEim3MOvqHF25DOf_fsbuSoUIl6-s9H1YEeOWHtSmmpLPiuupAK0tN8AUha7LrQ4J8MJgOvwmiAagSm0kEP1ls2iv2SEFhouRkjnWvSF89Nt1Ajt3R3dfDLP1FVFo5h-ooSU5E-bGtgWg4rab/s1366/Accueil%20-%20Nom%20de%20entreprise.png',
+    url:'https://storepage.github.io/cooperative/',
+    desc:'Plateforme d\'Artisanat Durable pour la visibilité digitale des petites structures.',
+    descLong:'Cette plateforme permet aux petites structures d\'accéder à un marché global avec une traçabilité complète des produits, de l\'atelier au client, tout en soutenant l\'économie sociale locale.',
+    features:['Galerie artisans','Boutique intégrée','Profils détaillés','Zoom HD','Expédition sécurisée'],
+    advantages:[
+      {icon:'visibility',t:'Visibilité Digitale',d:'Accès direct au marché global pour les artisans.'},
+      {icon:'verified',t:'Transparence',d:'Traçabilité complète du produit fini.'},
+      {icon:'eco',t:'Économie Sociale',d:'Modèle axé sur le commerce équitable.'}
+    ],
+    stats:[{v:'15+',l:'Coopératives'},{v:'2',l:'Langues'},{v:'Nat',l:'Livraison'}]
+  },
+  {
+    id:'cooperative-1',
+    title:'Coopérative-1',
+    badge:'Mobilier',
+    img:'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjp9refCXOUfdr0b-2Cilp5d4aFnjFxsdoX4OngSmsfNupTueQ6ODNYKwzW63AiRGDa8F2nkLRYaj3tOM3tvWC_ygYvX1XKIQ5lptsD1jqfy-8zLHmaK11FQbVOTCf-ACdZkaB_HJ-TAj-gAV5pk3U-HwA5r391qJy9_gBVLovfKsDtSpQlBqCea3Jrblb_/s3208/Accueil%20%E2%80%94%20Nom%20de%20entreprise2.png',
+    url:'https://storepage.github.io/cooperative-1/',
+    desc:'Excellence du Design Artisanal avec catalogue 3D et mobilier sur mesure.',
+    descLong:'Spécialisé dans le mobilier et la décoration, ce site met en avant des techniques ancestrales revisitées avec des matériaux nobles comme le bois et le cuivre.',
+    features:['Catalogue 3D','Commandes sur mesure','Paiement 3x','Suivi fabrication'],
+    advantages:[
+      {icon:'edit',t:'Sur-mesure',d:'Personnalisation directe avec l\'artisan.'},
+      {icon:'grade',t:'Qualité Premium',d:'Sélection de matériaux nobles.'},
+      {icon:'history',t:'Héritage',d:'Savoir-faire ancestral revisité.'}
+    ],
+    stats:[{v:'500+',l:'Produits'},{v:'100%',l:'Artisanal'},{v:'24/7',l:'Support'}]
+  },
+  {
+    id:'terroir-amazigh',
+    title:'Terroir Amazigh',
+    badge:'Terroir',
+    img:'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjcMyAJnLv5nQKmjsmR94rWNzAf0RF8F4H7BXQgkbsFgdO91EsBA6HtUdbTL7H4S6K7oUVtkTHqJkQArMnUcs3CFiA6c8gsEn7GBO0MDYeQPvR5IWNz_02-ZF5Vmb8MyBT3hAz_F97y1EmvaSQgtyI4RB3N4z1q-Yca5w16swHbSmq24pALUMrJqjWhWk_M/s4295/Accueil%20%E2%80%94%20Terroir-Amazigh.png',
+    url:'https://storepage.github.io/Terroir-Amazigh/',
+    desc:'Trésors de l\'Atlas et du Souss, focus sur l\'argan et les produits bio.',
+    descLong:'Une immersion culturelle dans le Souss et l\'Atlas, mettant en avant les coopératives féminines et les produits du terroir certifiés bio.',
+    features:['Carte terroirs','Certificats origine','Blog recettes','Multi-devises'],
+    advantages:[
+      {icon:'terrain',t:'Authenticité Berbère',d:'Produits uniques des montagnes de l\'Atlas.'},
+      {icon:'spa',t:'Bio-Engagement',d:'Focus sur les coopératives féminines.'},
+      {icon:'auto_stories',t:'Culture',d:'Immersion dans l\'histoire de chaque produit.'}
+    ],
+    stats:[{v:'30+',l:'Producteurs'},{v:'Bio',l:'Certifié'},{v:'Intl',l:'Livraison'}]
+  },
+  {
+    id:'coop-marocaine',
+    title:'Coopérative Marocaine',
+    badge:'Céramique',
+    img:'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjzbDl_AtBO0VVu2BTFfVGPcpr3zIhM82ETwIRMEOo4wrzqg83UIf5I6V2iZtGB3wHAlSHg-y4WgMu7loRe821H5qAVlYir_kmmmOTw2yBjHIWTuvCbjCFgmQwBAOVi5mSb37hDfWwOSOoTgo_ooAS_SlkE7HYUZxYYk_ufr3wLxgNTvQ1cgztdKgYHlCxw/s3364/Accueil%20%E2%80%94%20Coop%C3%A9rative%20Marocaine.png',
+    url:'https://storepage.github.io/cooperative-maroccaine/',
+    desc:'L\'Art de la Terre et du Feu : Poterie et céramique en vente directe.',
+    descLong:'Digitalisation des métiers de la poterie de Safi et Fès. Le zoom HD permet d\'apprécier la finesse des motifs peints à la main pour une audience mondiale.',
+    features:['Galerie immersive','Zoom HD textures','Espace boutique','Livraison anti-casse'],
+    advantages:[
+      {icon:'shopping_basket',t:'Zéro Intermédiaire',d:'Vente directe depuis les ateliers de Safi et Fès.'},
+      {icon:'zoom_in',t:'Détails Précis',d:'Appréciez la finesse des motifs à la main.'},
+      {icon:'public',t:'Audience Mondiale',d:'Interface multilingue pour collectionneurs.'}
+    ],
+    stats:[{v:'20+',l:'Artisans'},{v:'3',l:'Langues'},{v:'HD',l:'Zoom'}]
+  },
+  {
+    id:'coop-naturelle',
+    title:'Coopérative Naturelle',
+    badge:'Santé',
+    img:'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjMzkyWQRM4JzmKgtmvzTCfXmPJrUBMJ5t9NGKakm1-Dv5enrKyGUHVeMH7_M0uLmoWSa2ollsIUoznJr3z8g6biPXm23sy3MbfKaAUZdSjAmpDZqsgWzn7KMlBiARwHYClxX-h0mk2hAAb-MSFTvzhPghyphenhyphenbyRvtOFeJqPH_I2-6RGUdvAJYyli1zUO34gO/s5673/Cooperative%20Naturelle%20Souss.png',
+    url:'https://storepage.github.io/cooperative-naturelle/',
+    desc:'Santé et Cosmétique Naturelle avec des produits 100% bio et éco-responsables.',
+    descLong:'Une gamme complète de soins extraits à froid, sans additifs chimiques, privilégiant des packagings recyclables et une production éco-responsable.',
+    features:['Conseils experts','Packs cadeaux','Ingrédients bio','Abonnement'],
+    advantages:[
+      {icon:'clean_hands',t:'Pureté',d:'Aucun additif chimique, extraits à froid.'},
+      {icon:'self_care',t:'Bien-être',d:'Huiles essentielles et soins de peau.'},
+      {icon:'recycling',t:'Éco-responsable',d:'Packagings recyclables et durables.'}
+    ],
+    stats:[{v:'100%',l:'Bio'},{v:'50+',l:'Références'},{v:'Eco',l:'Friendly'}]
+  },
+  {
+    id:'zitoun',
+    title:'Coopérative Zitoun',
+    badge:'Alimentaire',
+    img:'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgFMx9zuziP9VKs_TNyRWqFGW0JBDRivT8Iav-FjYyNPkriCpV6SLn1r5uf-J8IxNTRurxNLwSCqlOzyUsRZb60N68GvymqEMNDVRly9ZPATPuXf-Iadg6pgAoVqyNBjffkHohyysEcpxHNvMwA7m789jcedFseMDSQwgG77oV6MxNduT_LRUhh-8R4OtEE/s3204/home%20-%20Coop%C3%A9rative%20Zitoun.png',
+    url:'https://storepage.github.io/Cooperative_Zitoun/',
+    desc:'L\'Or Vert du Maroc : Huile d\'olive de qualité extra-vierge en direct.',
+    descLong:'Focus exclusif sur l\'huile d\'olive de première pression. Présentation du processus de pressage traditionnel et moderne avec traçabilité par QR Code.',
+    features:['Analyse acidité','Vente gros/détail','Vidéos récolte','QR Traçabilité'],
+    advantages:[
+      {icon:'water_drop',t:'Qualité Extra-Vierge',d:'Huile de première pression à froid.'},
+      {icon:'agriculture',t:'Direct Producteur',d:'Soutien direct aux oliveraies locales.'},
+      {icon:'psychology',t:'Savoir-faire',d:'Mix entre tradition et modernité.'}
+    ],
+    stats:[{v:'10+',l:'Domaines'},{v:'2026',l:'Récolte'},{v:'Fût',l:'Export'}]
+  },
+  {
+    id:'tizwit',
+    title:'TIZWIT Terroir',
+    badge:'Apiculture',
+    img:'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEge3Lum89Cm6ULDDRyxuJSg6QWphKhOC_KNhi7bqESaIE2EmHsm8pJ9GWMyNOKeZMlSJ1L66Qtqw7r_x-2zx2WOwhECdAbX5JALz3kZ7vFcCTRQ1lzevDoz7e46ttDSpNC2Fa8oozDew2-4I74S5S-xxNIB4rjcZz0MB2FhmoX0O37Nj_Qe4bByOEZ8-sYk/s1366/TIZWIT%20%E2%80%94%20Coop%C3%A9rative%20Artisanale%20Marocaine%201.png',
+    url:'https://storepage.github.io/TIZWIT-Terroir/',
+    desc:'L\'Apiculture de Montagne : Miels rares et purs certifiés en laboratoire.',
+    descLong:'Spécialisé dans les miels de haute altitude (Thym, Euphorbe). Chaque pot est accompagné d\'un certificat d\'analyse garantissant sa pureté.',
+    features:['Types de miels','Analyse labo','Alertes stock','Parrainage'],
+    advantages:[
+      {icon:'local_florist',t:'Diversité Florale',d:'Miels rares récoltés en haute altitude.'},
+      {icon:'science',t:'Garanti Pur',d:'Certificat d\'analyse pour chaque pot.'},
+      {icon:'pest_control_rodent',t:'Protection Abeilles',d:'Pratiques préservant la biodiversité.'}
+    ],
+    stats:[{v:'12',l:'Variétés'},{v:'Labo',l:'Analyse'},{v:'100%',l:'Pur'}]
+  },
+  {
+    id:'coop-terroir-epices',
+    title:'Coop-Terroir',
+    badge:'Saveurs',
+    img:'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEipLsHM6NDlxLrLnAgF1c67W6AfTlmWYNDKrNwk1kXk8stF4SByFkqBNV6erXOgKCUv9MKURD45j1FsmPDFuJgVJmQZfs53pI3bJOF0SIHfgePLr0iHapYNl3GQANH6GSEGKrwKHP9SubrQAwdRDd9MuF3q1AOLM1VHoUwp2rUxEXOEuRtOtVm7KSsJa4tI/s2255/Coop%C3%A9rative%20Terroir%20Marocain.png',
+    url:'https://storepage.github.io/coop-terroir/',
+    desc:'Épices Authentiques du Maroc, moulues à la commande pour la fraîcheur.',
+    descLong:'Un voyage olfactif avec des mélanges maison comme le Ras el Hanout. Les épices sont moulues à la commande pour préserver tous les arômes.',
+    features:['Mélanges maison','Dosage personnalisé','Idées cuisine','Vente au poids'],
+    advantages:[
+      {icon:'timer',t:'Fraîcheur',d:'Épices moulues à la commande.'},
+      {icon:'auto_awesome',t:'Mélanges Exclusifs',d:'Ras el Hanout et mélanges Tajines.'},
+      {icon:'air',t:'Voyage Olfactif',d:'Profils de saveurs détaillés.'}
+    ],
+    stats:[{v:'40+',l:'Épices'},{v:'Zéro',l:'Colorant'},{v:'Intl',l:'Export'}]
+  },
+  {
+    id:'al-hikma',
+    title:'Al-Hikma',
+    badge:'Herboristerie',
+    img:'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiDqqwiYuCa5W2CQnVD2Qg4hGQ0JAnomnOv5KXUn8mUaefbM6XcQr1SISNBweguXDGZqnvUyBkj-MVxs1aFkb5mSMDRgbzri4H1y6mzV-8RO5zeok7kunML0OLICX2DwDHRtytJocWMfSv5FlL1XkQ_TaanENPMrMGMZrLQELudvdWG1yYgehh_J1IQyfVy/s3587/Coop%C3%A9rative%20Al%20Hikma.png',
+    url:'https://storepage.github.io/al-hikma/',
+    desc:'Traditions Médicinales et Plantes : Le savoir-faire de l\'herboristerie.',
+    descLong:'Valorisation des plantes médicinales marocaines. Le site propose un guide complet des vertus et des consultations en ligne pour des remèdes naturels.',
+    features:['Guide plantes','Consultation ligne','Tisanes bio','Espace pro'],
+    advantages:[
+      {icon:'menu_book',t:'Savoir Ancestral',d:'Valorisation des plantes traditionnelles.'},
+      {icon:'info',t:'Conseils Pratiques',d:'Fiches explicatives sur les vertus.'},
+      {icon:'nature',t:'Qualité Sauvage',d:'Cueillette sauvage raisonnée.'}
+    ],
+    stats:[{v:'80+',l:'Herbes'},{v:'Qualité',l:'Certifié'},{v:'Trad',l:'Expertise'}]
+  }
+];
+
+// Build cards
+const grid = document.getElementById('cards-grid');
+SITES.forEach(s => {
+  grid.innerHTML += `
+  <div class="portfolio-card flex flex-col bg-white rounded-2xl overflow-hidden border border-outline-variant/30 shadow-sm">
+    <div class="relative overflow-hidden aspect-[16/10]">
+      <img class="w-full h-full object-cover transition-transform duration-700 hover:scale-105" src="${s.img}" alt="${s.title}"/>
+      <span class="absolute top-3 left-3 bg-secondary text-on-secondary text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-full">${s.badge}</span>
+    </div>
+    <div class="flex flex-col flex-1 p-6 gap-3">
+      <h3 class="font-serif text-xl text-primary">${s.title}</h3>
+      <p class="text-on-surface-variant text-sm leading-relaxed flex-1">${s.desc}</p>
+      <div class="flex gap-3 pt-2">
+        <button onclick="openModal('${s.id}')"
+          class="flex-1 bg-primary text-on-primary px-4 py-2.5 rounded-md text-sm font-semibold hover:bg-primary-container transition-all flex items-center justify-center gap-2">
+          <span class="material-symbols-outlined text-base">visibility</span> Voir plus
+        </button>
+        <a href="https://wa.me/${WA}?text=${encodeURIComponent('Bonjour, je veux commander le site ' + s.title + '.')}" target="_blank"
+          class="flex-1 bg-[#25D366] text-white px-4 py-2.5 rounded-md text-sm font-semibold hover:bg-[#1ebe5a] transition-all flex items-center justify-center gap-2">
+          ${WA_SVG} Commander
+        </a>
+      </div>
+    </div>
+  </div>`;
+});
+
+function iframeLoaded(type){
+  const el=document.getElementById('iframe-loading-'+type);
+  if(el) el.style.display='none';
+}
+
+function openModal(id){
+  const s=SITES.find(x=>x.id===id);
+  if(!s) return;
+  document.getElementById('modal-title').textContent=s.title;
+  document.getElementById('modal-badge').textContent=s.badge;
+  document.getElementById('modal-url').textContent=s.url;
+  document.getElementById('modal-desc-long').textContent=s.descLong;
+  ['desk','mob'].forEach(t=>{const el=document.getElementById('iframe-loading-'+t);if(el)el.style.display='flex';});
+  document.getElementById('modal-iframe-desk').src=s.url;
+  document.getElementById('modal-iframe-mob').src=s.url;
+  document.getElementById('modal-features').innerHTML=s.features.map(f=>`<span class="feat-badge"><span class="dot"></span>${f}</span>`).join('');
+  document.getElementById('modal-advantages').innerHTML=s.advantages.map(a=>`
+    <div class="adv-card">
+      <div class="adv-icon"><span class="material-symbols-outlined text-secondary" style="font-size:20px">${a.icon}</span></div>
+      <div><p class="font-sans text-sm font-bold text-on-surface">${a.t}</p><p class="font-sans text-xs text-on-surface-variant leading-relaxed mt-0.5">${a.d}</p></div>
+    </div>`).join('');
+  document.getElementById('modal-stats').innerHTML=s.stats.map(st=>`
+    <div class="bg-surface-container rounded-xl p-4 text-center border border-outline-variant/20">
+      <p class="font-serif text-2xl text-secondary font-bold">${st.v}</p>
+      <p class="font-sans text-[11px] text-outline mt-1">${st.l}</p>
+    </div>`).join('');
+  document.getElementById('modal-visit-btn').href=s.url;
+  document.getElementById('modal-wa-btn').href=`https://wa.me/${WA}?text=${encodeURIComponent('Bonjour, je suis intéressé(e) par le site ' + s.title + '. Pouvez-vous me donner un devis ?')}`;
+  document.getElementById('detail-modal').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+
+function closeModal(){
+  document.getElementById('detail-modal').classList.remove('open');
+  document.body.style.overflow='';
+  document.getElementById('modal-iframe-desk').src='';
+  document.getElementById('modal-iframe-mob').src='';
+}
+
+document.getElementById('detail-modal').addEventListener('click',function(e){if(e.target===this)closeModal();});
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closeModal();});
+</script>
+</body>
+</html>
